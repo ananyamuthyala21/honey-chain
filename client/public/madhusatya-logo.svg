@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">HIVETRUST honey mark</title>
+  <desc id="desc">A warm amber honey drop with a simple bee stripe motif</desc>
+  <defs>
+    <linearGradient id="honey" x1="24" y1="16" x2="104" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FCD34D"/>
+      <stop offset="1" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="30" fill="#FFFDF7"/>
+  <path d="M64 16c16 22 34 38 34 60a34 34 0 1 1-68 0c0-22 18-38 34-60Z" fill="url(#honey)"/>
+  <path d="M35 61h58M31 76h66M39 91h50" stroke="#7C2D12" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+  <circle cx="48" cy="48" r="4" fill="#7C2D12"/>
+  <circle cx="80" cy="48" r="4" fill="#7C2D12"/>
+</svg>

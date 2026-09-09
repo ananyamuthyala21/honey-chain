@@ -1,177 +1,308 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
-}
-
-.dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  /* Default: Forest Canopy & Wild Botanical Theme */
+  --canvas-bg: #0F1D15;
+  --surface-base: #14241B;
+  --surface-card: #1B2E24;
+  --surface-sunken: #0B150F;
+  --primary-accent: #EAB308;
+  --secondary-accent: #22C55E;
+  --text-main: #EAF2EC;
+  --text-muted: #A3B8AA;
+  --border-subtle: rgba(234, 179, 8, 0.25);
+  --border-strong: rgba(234, 179, 8, 0.5);
+  --pattern-color: rgba(234, 179, 8, 0.08);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
   body {
-    @apply bg-background text-foreground;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: var(--canvas-bg);
+    color: var(--text-main);
+    overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
-  button:not(:disabled),
-  [role="button"]:not([aria-disabled="true"]),
-  [type="button"]:not(:disabled),
-  [type="submit"]:not(:disabled),
-  [type="reset"]:not(:disabled),
-  a[href],
-  select:not(:disabled),
-  input[type="checkbox"]:not(:disabled),
-  input[type="radio"]:not(:disabled) {
-    @apply cursor-pointer;
+
+  h1, h2, h3, .font-display {
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 }
 
-@layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
-  .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
-    padding-right: 1rem;
-  }
+/* Dynamic theme scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
-  .flex {
-    min-height: 0;
-    min-width: 0;
-  }
+::-webkit-scrollbar-track {
+  background: var(--surface-sunken);
+}
 
-  @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
-      padding-right: 1.5rem;
-    }
-  }
+::-webkit-scrollbar-thumb {
+  background: var(--surface-card);
+  border-radius: 4px;
+}
 
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem; /* 32px - desktop padding */
-      padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
-    }
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-accent);
+}
+
+/* Honeycomb pattern adapting to theme */
+.bg-honeycomb-pattern {
+  background-image: radial-gradient(circle at center, var(--pattern-color) 1px, transparent 1px),
+    repeating-linear-gradient(60deg, rgba(234, 179, 8, 0.03) 0, rgba(234, 179, 8, 0.03) 1px, transparent 0, transparent 20px),
+    repeating-linear-gradient(-60deg, rgba(234, 179, 8, 0.03) 0, rgba(234, 179, 8, 0.03) 1px, transparent 0, transparent 20px);
+  background-size: 28px 48px;
+}
+
+/* -------------------------------------------------------------
+   THEME 1: FOREST CANOPY & WILD BOTANICAL (Default)
+   ------------------------------------------------------------- */
+html.theme-forest,
+html:not([class*="theme-"]) {
+  --canvas-bg: #0F1D15;
+  --surface-base: #14241B;
+  --surface-card: #1B2E24;
+  --surface-sunken: #0B150F;
+  --primary-accent: #EAB308;
+  --secondary-accent: #22C55E;
+  --text-main: #EAF2EC;
+  --text-muted: #A3B8AA;
+
+  [class*="bg-[#2B1B12]"] { background-color: #0F1D15 !important; }
+  [class*="bg-[#23150D]"] { background-color: #0A140E !important; }
+  [class*="bg-[#3A2415]"] { background-color: #16281E !important; }
+  [class*="bg-[#4A2E1F]"] { background-color: #1B3226 !important; }
+  [class*="bg-[#1A0F09]"] { background-color: #070E0A !important; }
+
+  [class*="border-[#C99A3A]"] { border-color: rgba(234, 179, 8, 0.35) !important; }
+  [class*="border-[#4A2E1F]"] { border-color: rgba(34, 197, 94, 0.2) !important; }
+
+  [class*="text-[#F2E4C9]"] { color: #EAF2EC !important; }
+  [class*="text-[#C9B394]"] { color: #A3B8AA !important; }
+  [class*="text-[#C99A3A]"] { color: #EAB308 !important; }
+
+  [class*="from-[#1A0F09]"] { --tw-gradient-from: #070E0A var(--tw-gradient-from-position) !important; }
+  [class*="via-[#2B1B12]"], [class*="via-[#23150D]"] { --tw-gradient-via: #0F1D15 var(--tw-gradient-via-position) !important; }
+  [class*="to-[#3A2415]"], [class*="to-[#1A0F09]"] { --tw-gradient-to: #16281E var(--tw-gradient-to-position) !important; }
+}
+
+/* -------------------------------------------------------------
+   THEME 2: WARM AMBER & ROASTED WOOD (Original Classic)
+   ------------------------------------------------------------- */
+html.theme-amber {
+  --canvas-bg: #2B1B12;
+  --surface-base: #23150D;
+  --surface-card: #3A2415;
+  --surface-sunken: #1A0F09;
+  --primary-accent: #C99A3A;
+  --secondary-accent: #87D636;
+  --text-main: #F2E4C9;
+  --text-muted: #C9B394;
+  /* Original hex styling stays natural without overrides */
+}
+
+/* -------------------------------------------------------------
+   THEME 3: GOLDEN LIGHT & GOURMET PARCHMENT (Daylight Warm)
+   ------------------------------------------------------------- */
+html.theme-golden-light {
+  --canvas-bg: #FAF6F0;
+  --surface-base: #F3EBE0;
+  --surface-card: #FFFFFF;
+  --surface-sunken: #EADDCF;
+  --primary-accent: #D97706;
+  --secondary-accent: #15803D;
+  --text-main: #231710;
+  --text-muted: #6B5646;
+
+  [class*="bg-[#2B1B12]"] { background-color: #FAF6F0 !important; }
+  [class*="bg-[#23150D]"] { background-color: #FFFFFF !important; }
+  [class*="bg-[#3A2415]"] { background-color: #F7EFE4 !important; }
+  [class*="bg-[#4A2E1F]"] { background-color: #FFFFFF !important; }
+  [class*="bg-[#1A0F09]"] { background-color: #EFE4D6 !important; }
+
+  [class*="border-[#C99A3A]"] { border-color: rgba(217, 119, 6, 0.35) !important; }
+  [class*="border-[#4A2E1F]"] { border-color: rgba(217, 119, 6, 0.2) !important; }
+
+  [class*="text-[#F2E4C9]"] { color: #231710 !important; }
+  [class*="text-[#C9B394]"] { color: #6B5646 !important; }
+  [class*="text-[#C99A3A]"] { color: #B45309 !important; }
+
+  [class*="from-[#1A0F09]"] { --tw-gradient-from: #F5EEE4 var(--tw-gradient-from-position) !important; }
+  [class*="via-[#2B1B12]"], [class*="via-[#23150D]"] { --tw-gradient-via: #FAF6F0 var(--tw-gradient-via-position) !important; }
+  [class*="to-[#3A2415]"], [class*="to-[#1A0F09]"] { --tw-gradient-to: #F2E8DB var(--tw-gradient-to-position) !important; }
+}
+
+/* -------------------------------------------------------------
+   THEME 4: AGRI-FINTECH & LAB ANALYTICS (Slate Navy & Saffron)
+   ------------------------------------------------------------- */
+html.theme-agri-fintech {
+  --canvas-bg: #0B111E;
+  --surface-base: #0F172A;
+  --surface-card: #1E293B;
+  --surface-sunken: #070B14;
+  --primary-accent: #0284C7;
+  --secondary-accent: #F59E0B;
+  --text-main: #F1F5F9;
+  --text-muted: #94A3B8;
+
+  [class*="bg-[#2B1B12]"] { background-color: #0B111E !important; }
+  [class*="bg-[#23150D]"] { background-color: #0F172A !important; }
+  [class*="bg-[#3A2415]"] { background-color: #1E293B !important; }
+  [class*="bg-[#4A2E1F]"] { background-color: #162033 !important; }
+  [class*="bg-[#1A0F09]"] { background-color: #080D17 !important; }
+
+  [class*="border-[#C99A3A]"] { border-color: rgba(2, 132, 199, 0.4) !important; }
+  [class*="border-[#4A2E1F]"] { border-color: rgba(148, 163, 184, 0.25) !important; }
+
+  [class*="text-[#F2E4C9]"] { color: #F1F5F9 !important; }
+  [class*="text-[#C9B394]"] { color: #94A3B8 !important; }
+  [class*="text-[#C99A3A]"] { color: #38BDF8 !important; }
+
+  [class*="from-[#1A0F09]"] { --tw-gradient-from: #080D17 var(--tw-gradient-from-position) !important; }
+  [class*="via-[#2B1B12]"], [class*="via-[#23150D]"] { --tw-gradient-via: #0B111E var(--tw-gradient-via-position) !important; }
+  [class*="to-[#3A2415]"], [class*="to-[#1A0F09]"] { --tw-gradient-to: #1E293B var(--tw-gradient-to-position) !important; }
+}
+
+/* -------------------------------------------------------------
+   THEME 5: SMOKED CEDAR & RAW PROPOLIS (Artisanal Timber)
+   ------------------------------------------------------------- */
+html.theme-smoked-cedar {
+  --canvas-bg: #1A1412;
+  --surface-base: #140F0D;
+  --surface-card: #251E1A;
+  --surface-sunken: #0E0A08;
+  --primary-accent: #D4A359;
+  --secondary-accent: #6E9873;
+  --text-main: #EFE8DF;
+  --text-muted: #B3A497;
+
+  [class*="bg-[#2B1B12]"] { background-color: #1A1412 !important; }
+  [class*="bg-[#23150D]"] { background-color: #140F0D !important; }
+  [class*="bg-[#3A2415]"] { background-color: #211915 !important; }
+  [class*="bg-[#4A2E1F]"] { background-color: #2A211C !important; }
+  [class*="bg-[#1A0F09]"] { background-color: #0E0A08 !important; }
+
+  [class*="border-[#C99A3A]"] { border-color: rgba(212, 163, 89, 0.35) !important; }
+  [class*="border-[#4A2E1F]"] { border-color: rgba(110, 152, 115, 0.25) !important; }
+
+  [class*="text-[#F2E4C9]"] { color: #EFE8DF !important; }
+  [class*="text-[#C9B394]"] { color: #B3A497 !important; }
+  [class*="text-[#C99A3A]"] { color: #D4A359 !important; }
+
+  [class*="from-[#1A0F09]"] { --tw-gradient-from: #0E0A08 var(--tw-gradient-from-position) !important; }
+  [class*="via-[#2B1B12]"], [class*="via-[#23150D]"] { --tw-gradient-via: #1A1412 var(--tw-gradient-via-position) !important; }
+  [class*="to-[#3A2415]"], [class*="to-[#1A0F09]"] { --tw-gradient-to: #251E1A var(--tw-gradient-to-position) !important; }
+}
+
+/* Shared portal palette: follows the same HIVETRUST theme selector as the admin suite. */
+:root,
+html.theme-forest {
+  --portal-dark: #0F1D15;
+  --portal-panel: #1B2E24;
+  --portal-canvas: #EAF2EC;
+  --portal-surface: #F7FBF8;
+  --portal-accent: #EAB308;
+  --portal-accent-hover: #FACC15;
+  --portal-hero: #163A2A;
+}
+html.theme-amber {
+  --portal-dark: #24180d;
+  --portal-panel: #3c2511;
+  --portal-canvas: #f7f1df;
+  --portal-surface: #fffaf0;
+  --portal-accent: #d99a2b;
+  --portal-accent-hover: #efb341;
+  --portal-hero: #4a2e1f;
+}
+html.theme-golden-light {
+  --portal-dark: #3b2412;
+  --portal-panel: #6b421f;
+  --portal-canvas: #fbf3e6;
+  --portal-surface: #ffffff;
+  --portal-accent: #d97706;
+  --portal-accent-hover: #f59e0b;
+  --portal-hero: #7c4a22;
+}
+html.theme-agri-fintech {
+  --portal-dark: #0b111e;
+  --portal-panel: #1e293b;
+  --portal-canvas: #e8eef7;
+  --portal-surface: #f8fafc;
+  --portal-accent: #0284c7;
+  --portal-accent-hover: #38bdf8;
+  --portal-hero: #153453;
+}
+html.theme-smoked-cedar {
+  --portal-dark: #1a1412;
+  --portal-panel: #3a2920;
+  --portal-canvas: #efe6dc;
+  --portal-surface: #fffaf5;
+  --portal-accent: #d4a359;
+  --portal-accent-hover: #e7bc77;
+  --portal-hero: #5a3a26;
+}
+
+/* Portal themes intentionally change more than color: type, geometry, elevation and texture. */
+:root,
+html.theme-forest {
+  --portal-radius: 1.25rem;
+  --portal-font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --portal-shadow: 0 22px 55px rgba(5, 35, 22, 0.22);
+  --portal-texture: radial-gradient(circle at 15% 10%, rgba(234, 179, 8, .12), transparent 30%), radial-gradient(circle at 85% 85%, rgba(34, 197, 94, .11), transparent 28%);
+}
+html.theme-amber {
+  --portal-radius: 2rem;
+  --portal-font: Georgia, 'Times New Roman', serif;
+  --portal-shadow: 0 25px 65px rgba(78, 42, 15, 0.28);
+  --portal-texture: radial-gradient(circle at 80% 15%, rgba(217, 154, 43, .18), transparent 28%), linear-gradient(135deg, rgba(255, 250, 240, .35), transparent 45%);
+}
+html.theme-golden-light {
+  --portal-radius: .9rem;
+  --portal-font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --portal-shadow: 0 18px 40px rgba(146, 78, 16, 0.16);
+  --portal-texture: linear-gradient(90deg, rgba(217, 119, 6, .06) 1px, transparent 1px), linear-gradient(rgba(217, 119, 6, .06) 1px, transparent 1px);
+}
+html.theme-agri-fintech {
+  --portal-radius: .65rem;
+  --portal-font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --portal-shadow: 0 18px 42px rgba(2, 52, 88, 0.28);
+  --portal-texture: linear-gradient(rgba(56, 189, 248, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, .045) 1px, transparent 1px);
+}
+html.theme-smoked-cedar {
+  --portal-radius: .55rem;
+  --portal-font: Georgia, 'Times New Roman', serif;
+  --portal-shadow: 0 20px 45px rgba(48, 27, 16, 0.3);
+  --portal-texture: repeating-linear-gradient(0deg, rgba(212, 163, 89, .055) 0 1px, transparent 1px 7px);
+}
+.portal-shell {
+  font-family: var(--portal-font);
+  background-image: var(--portal-texture);
+  transition: background .3s ease, color .3s ease, border-radius .3s ease, box-shadow .3s ease;
+}
+.portal-shell button,
+.portal-shell input,
+.portal-shell select,
+.portal-shell textarea {
+  border-radius: var(--portal-radius);
+}
+.portal-shell .shadow-xl,
+.portal-shell .shadow-2xl {
+  box-shadow: var(--portal-shadow);
+}
+.hivetrust-admin-shell {
+  font-family: var(--portal-font);
+  background-image: var(--portal-texture);
+  transition: background .3s ease, color .3s ease;
+}
+.hivetrust-admin-shell .rounded-xl,
+.hivetrust-admin-shell .rounded-2xl,
+.hivetrust-admin-shell .rounded-3xl {
+  border-radius: var(--portal-radius);
+  transition: border-radius .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+.hivetrust-admin-shell .shadow-xl,
+.hivetrust-admin-shell .shadow-2xl {
+  box-shadow: var(--portal-shadow);
 }
