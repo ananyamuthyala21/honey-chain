@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../../portal/i18n.jsx";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api/v1";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 const SAMPLE_VERIFICATION = {
   verified: true,
   trust_score: 96,
@@ -56,6 +56,50 @@ const SAMPLE_VERIFICATION = {
   },
 };
 
+function normalizeVerificationResponse(result, token) {
+  if (result?.verified === true) return result;
+  if (!result?.batch || result.authenticity === "NOT_FOUND") return null;
+
+  const source = result.batch;
+  const location = [source.village, source.state].filter(Boolean).join(", ") || "Registered apiary";
+  const score = Number(result.authenticityScore ?? 0);
+  return {
+    verified: result.authenticity === "GENUINE",
+    trust_score: score,
+    trust_category: result.authenticity === "GENUINE" ? "High-confidence registered batch" : "Verification requires review",
+    trust_breakdown: {
+      provenance: score,
+      hive_health: score,
+      quality: score,
+      record_integrity: result.blockchainVerified ? 100 : 38,
+    },
+    counterfeit_risk: { score: Math.max(0, 100 - score) },
+    beekeeper: {
+      name: source.beekeeperName || source.beekeeperId || "Registered beekeeper",
+      beekeeper_code: source.beekeeperId || "Not available",
+      phone: "Not available",
+      location,
+      status: result.databaseVerified ? "Registered and active" : "Requires review",
+    },
+    hive: {
+      hive_code: source.hiveNumber || source.hiveId || "Not available",
+      bee_species: source.species || "Registered honeybee colony",
+      location,
+      installation_date: source.installationDate || "",
+      status: "Registered",
+    },
+    batch: {
+      batch_code: source.batchId || source.id || token,
+      quantity_kg: Number(source.quantityKg ?? 0),
+      harvest_date: source.harvestDate || source.createdAt || "",
+      processing_status: source.processingStatus || "Traceability record available",
+      packaging_status: source.packagingStatus || "Recorded in ledger",
+      storage_location: source.packagingFacility || location,
+      extraction_method: source.extractionMethod || "Recorded in batch record",
+    },
+  };
+}
+
 export default function QRVerificationPage({ token, onBack }) {
   const { t, language, setLanguage, languages } = useLanguage();
   const [data, setData] = useState(null);
@@ -86,16 +130,18 @@ export default function QRVerificationPage({ token, onBack }) {
       setLoading(true);
       setError("");
 
-      const response = await fetch(`${API_BASE}/qr/verify/${qrToken}`);
+      const response = await fetch(`${API_BASE}/verify/${encodeURIComponent(qrToken)}`);
 
       if (!response.ok) {
         throw new Error(t("verificationFailed"));
       }
 
       const result = await response.json();
-      setData(result);
+      const normalized = normalizeVerificationResponse(result, qrToken);
+      if (!normalized) throw new Error(t("verificationFailed"));
+      setData(normalized);
       // Record privacy-safe scan intelligence separately; verification remains backward compatible.
-      fetch(`${API_BASE}/intelligence/qr/${qrToken}/scan`, {
+      fetch(`${API_BASE}/intelligence/qr/${encodeURIComponent(qrToken)}/scan`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

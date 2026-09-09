@@ -70,6 +70,16 @@ function normalizeSharedBatches(sourceBatches, sourceBeekeepers, sourceHives) {
       item => item.id === batch.beekeeperId
     );
     const hive = sourceHives.find(item => item.id === batch.hiveId);
+    let verificationToken = batch.id;
+    try {
+      const parsed = new URL(batch.qrPayloadUrl || "", window.location.origin);
+      verificationToken =
+        parsed.pathname.match(/\/verify\/([^/]+)/)?.[1] ||
+        parsed.searchParams.get("token") ||
+        batch.id;
+    } catch {
+      verificationToken = batch.qrPayloadUrl || batch.id;
+    }
     return {
       code: batch.id,
       quantity: `${batch.quantityKg} kg`,
@@ -88,7 +98,7 @@ function normalizeSharedBatches(sourceBatches, sourceBeekeepers, sourceHives) {
       hive: batch.hiveNumber || hive?.hiveNumber || batch.hiveId,
       species: hive?.species || "Registered honeybee colony",
       installed: hive?.installationDate || "Recorded in hive registry",
-      qr: batch.qrPayloadUrl || `${window.location.origin}/verify/${batch.id}`,
+      qr: decodeURIComponent(verificationToken),
     };
   });
 }

@@ -141,10 +141,15 @@ export default function App() {
 
   const handleCustomerVerify = (value: string) => {
     if (!value) return;
-    const destination = value.startsWith("http")
-      ? value
-      : `/verify/${encodeURIComponent(value)}`;
-    window.location.href = destination;
+    let token = value;
+    try {
+      const parsed = new URL(value, window.location.origin);
+      const pathToken = parsed.pathname.match(/\/verify\/([^/]+)/)?.[1];
+      token = pathToken || parsed.searchParams.get("token") || value;
+    } catch {
+      token = value;
+    }
+    window.location.href = `/verify/${encodeURIComponent(decodeURIComponent(token))}`;
   };
 
   if (isLoading) {
